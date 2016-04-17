@@ -43,4 +43,35 @@ defmodule TetrisBoardTest do
 			]))
 	end
 
+	test "render first line" do
+		assert(
+			TetrisBoard.render_line([{0,0}, {0,4}], 0, 3) ==
+			"*   *"
+			)
+	end
+
+	test "render last line" do
+		assert(
+			TetrisBoard.render_line([{3,0},{3,1},{3,2},{3,3},{3,4}], 3, 3) ==
+			"*****"
+			)
+	end
+
+	test "render in the middle" do
+		assert(
+			TetrisBoard.render_line([{1,0},{1,2},{1,4}], 1, 3) ==
+			"* * *"
+			)
+	end
+
+	test "render whole map" do
+		assert(
+			TetrisBoard.render_map([
+				{3, 0}, {3, 1}, {3, 2}, {3, 3}, {3, 4},
+				{0, 0}, {1, 0}, {2, 0},
+ 				{0, 4}, {1, 4}, {2, 4}
+			], 3, 3) ==
+			"*   *\n*   *\n*   *\n*****\n"
+			)
+	end
 end

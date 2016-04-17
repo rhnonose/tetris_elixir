@@ -10,4 +10,21 @@ defmodule TetrisBoard do
 		Enum.concat([bottom_row, left_column, right_column])
 	end
 
+	def render_map(map, height, width) do
+		0..height |>
+		Enum.map(fn line -> render_line(map, line, width) <> "\n" end) |>
+		Enum.join("")
+	end
+
+	def render_line(map, line, width) do
+		0..width+1 |>
+		Enum.map(fn col -> 
+			if Enum.find(map,
+				fn {x,y} -> col == y && x == line end) != nil
+				do"*" else " "
+			end
+		end) |>
+		Enum.join("")
+	end
+
 end
