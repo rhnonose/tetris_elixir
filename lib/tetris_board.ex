@@ -10,10 +10,16 @@ defmodule TetrisBoard do
 		Enum.concat([bottom_row, left_column, right_column])
 	end
 
-	def render_map(map, height, width) do
+	def render_map(map) do
+		[{height, wid}] = map |> Enum.sort |> Enum.take(-1)
+		width = wid - 1
 		0..height |>
 		Enum.map(fn line -> render_line(map, line, width) <> "\n" end) |>
 		Enum.join("")
+	end
+
+	def render_map(map, current_piece) do
+		render_map(map ++ current_piece)
 	end
 
 	def render_line(map, line, width) do
